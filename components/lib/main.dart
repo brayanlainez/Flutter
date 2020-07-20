@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+
+import 'package:components/routes/routes.dart';
+import 'package:components/src/pages/home_temp.dart';
 
 void main() {
   runApp(MyApp());
@@ -9,7 +13,19 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Componentes App',
+      debugShowCheckedModeBanner: false,
+      localizationsDelegates: [
+        // ... app-specific localization delegate[s] here
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: [
+        const Locale('en', 'US'), // English
+        const Locale('he', 'IL'), // Hebrew
+        const Locale('es', 'ES'),
+        // ... other locales the app supports
+      ],
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -20,13 +36,19 @@ class MyApp extends StatelessWidget {
         // or simply save your changes to "hot reload" in a Flutter IDE).
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.green,
         // This makes the visual density adapt to the platform that you run
         // the app on. For desktop platforms, the controls will be smaller and
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      // home: MyHomePage(title: 'Flutter Demo Home Page'),
+      initialRoute: '/',
+      routes: getAplicationRoutes(),
+      onGenerateRoute: (RouteSettings settings){
+        print("Ruta llamada: ${settings.name}");
+        return MaterialPageRoute( builder: (BuildContext context) => HomePageTemp(), );
+      },
     );
   }
 }
